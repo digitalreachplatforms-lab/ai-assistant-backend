@@ -230,11 +230,13 @@ async function handleMessage(clientId, message, ws) {
       session.conversationHistory.push(assistantMessage);
 
       // Send response
-      ws.send(JSON.stringify({
-        type: 'chat_response',
-        text: aiResponse,
-        timestamp: new Date().toISOString()
-      }));
+    ws.send(JSON.stringify({
+  type: 'chat_response',
+  text: aiResponse,
+  response: aiResponse,  // For web control panel compatibility
+  timestamp: new Date().toISOString()
+}));
+
       
       console.log(`[Chat] User: ${userMessage.content.substring(0, 50)}...`);
       console.log(`[Chat] AI: ${aiResponse.substring(0, 50)}...`);
