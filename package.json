@@ -1,0 +1,19 @@
+{
+  "name": "ai-assistant-backend",
+  "version": "1.0.0",
+  "description": "AI Assistant WebSocket Backend for Unreal Engine",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "ws": "^8.18.0",
+    "express": "^4.21.1",
+    "cors": "^2.8.5",
+    "uuid": "^11.0.3"
+  }
+}
