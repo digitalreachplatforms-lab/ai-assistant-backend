@@ -1,12 +1,12 @@
 {
-  "name": "ai-assistant-backend-v3",
+  "name": "ai-assistant-backend",
   "version": "3.0.0",
   "description": "Complete AI Assistant Backend with Calendar, Voice, Knowledge Base, Memory, and Automation",
   "type": "module",
-  "main": "index-complete.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node index-complete.js",
-    "dev": "nodemon index-complete.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Testing not yet implemented\" && exit 0"
   },
   "dependencies": {
@@ -26,7 +26,8 @@
     "nodemon": "^3.0.1"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "20.x",
+    "npm": "10.x"
   },
   "keywords": [
     "ai",
