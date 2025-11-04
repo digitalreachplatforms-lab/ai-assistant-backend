@@ -142,34 +142,22 @@ wss.on('connection', (ws) => {
           break;
           
         case 'chat':
+          // FIXED: Proper error handling and AI response
           if (!playerId) {
             ws.send(JSON.stringify({
               type: 'error',
-              message: 'Not registered. Send register message first.',
+              message: 'Player not registered. Send register message first.',
+              timestamp: new Date().toISOString(),
             }));
-            return;
+            break;
           }
           
-          // Check if this is calendar-related
-          const isCalendarRelated = message.message.toLowerCase().match(
-            /calendar|appointment|schedule|remind|dentist|meeting|event/
-          );
-          
-          let response;
-          
-          if (isCalendarRelated) {
-            // Use calendar conversation flow
-            response = await calendarFlow.handleMessage(
-              playerId,
-              message.message,
-              sessions.get(playerId).conversationState
-            );
-          } else {
-            // Use general AI
-            response = await aiService.chat([
-              { role: 'user', content: message.message }
-            ]);
-          }
+          // Get AI response
+          const userMessage = message.message || message.text || '';
+          const response = await aiService.chat(userMessage, {
+            playerId,
+            context: sessions.get(playerId)?.conversationState,
+          });
           
           ws.send(JSON.stringify({
             type: 'chat_response',
@@ -185,17 +173,24 @@ wss.on('connection', (ws) => {
           ws.send(JSON.stringify({
             type: 'voice_response',
             message: 'Voice processing not yet implemented',
+            timestamp: new Date().toISOString(),
           }));
           break;
           
         default:
           console.log(`⚠️  Unknown message type: ${message.type}`);
+          ws.send(JSON.stringify({
+            type: 'error',
+            message: `Unknown message type: ${message.type}`,
+            timestamp: new Date().toISOString(),
+          }));
       }
     } catch (error) {
       console.error('❌ Error processing message:', error);
       ws.send(JSON.stringify({
         type: 'error',
         message: error.message,
+        timestamp: new Date().toISOString(),
       }));
     }
   });
@@ -229,6 +224,21 @@ app.get('/api/health', (req, res) => {
 
 app.get('/api/budget', (req, res) => {
   res.json(budgetManager.getStatus());
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    name: 'AI Assistant Backend',
+    version: '3.0.0',
+    status: 'running',
+    endpoints: {
+      health: '/api/health',
+      budget: '/api/budget',
+      websocket: 'ws://[host]:[port]',
+    },
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // ═══════════════════════════════════════════════════════════
