@@ -1,6 +1,6 @@
 /**
  * Complete AI Assistant Backend v3.0
- * Integrated system with:
+ * Integrated system  with:
  * - Multi-model AI (OpenAI, Anthropic, Gemini)
  * - Voice (ElevenLabs + Free TTS fallback)
  * - Calendar management with Google Calendar
