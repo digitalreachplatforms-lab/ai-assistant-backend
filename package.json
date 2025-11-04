@@ -1,19 +1,41 @@
 {
-  "name": "ai-assistant-backend",
-  "version": "1.0.0",
-  "description": "AI Assistant WebSocket Backend for Unreal Engine",
+  "name": "ai-assistant-backend-v3",
+  "version": "3.0.0",
+  "description": "Complete AI Assistant Backend with Calendar, Voice, Knowledge Base, Memory, and Automation",
   "type": "module",
-  "main": "index.js",
+  "main": "index-complete.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index-complete.js",
+    "dev": "nodemon index-complete.js",
+    "test": "echo \"Testing not yet implemented\" && exit 0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.14.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "openai": "^4.20.0",
+    "@anthropic-ai/sdk": "^0.9.1",
+    "@google/generative-ai": "^0.1.3",
+    "axios": "^1.6.0",
+    "googleapis": "^128.0.0",
+    "puppeteer": "^21.5.2",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   },
   "engines": {
     "node": ">=18.0.0"
   },
-  "dependencies": {
-    "ws": "^8.18.0",
-    "express": "^4.21.1",
-    "cors": "^2.8.5",
-    "uuid": "^11.0.3"
-  }
+  "keywords": [
+    "ai",
+    "assistant",
+    "calendar",
+    "voice",
+    "automation",
+    "unreal-engine"
+  ],
+  "author": "Digital Reach Platforms Lab",
+  "license": "MIT"
 }
